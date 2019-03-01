@@ -9,7 +9,7 @@ let neutral;
 
 
 function setup() {
-    createCanvas(1280, 720);
+    createCanvas(640, 480);
     background(255);
     video = createCapture(VIDEO);
     video.hide() // hides the html element
@@ -26,7 +26,7 @@ function setup() {
     faceapi.load
     faceapi.loadSsdMobilenetv1Model('/models')
     faceapi.loadFaceExpressionModel('/models');
-    console.log(faceapi.nets)
+    // console.log(faceapi.nets)
 
 }
 
@@ -40,7 +40,7 @@ function draw() {
         .then((allFaces) => {
 
         background(255);
-        image(video, 0, 0)
+        image(video, 640, 0, -640, 480)
             for (var detectionsWithExpressions of allFaces) {
                 console.log(allFaces);
 
@@ -70,31 +70,5 @@ function draw() {
                     
                     image(bestImg, face.box.x, face.box.y, small, small);
                     // console.log(neutral, face.box.x, face.box.y, small, small);
-                    console.log(bestExpr);
-                }
-
-
-            }
-        });
-
-
-    // if (poses != undefined) {
-
-    //     for (let i = 0; i < poses.length; i++) { // Looping over all the poses
-    //         for (let j = 0; j < poses[i].pose.keypoints.length; j++) { // Looping over the keypoints in each pose
-    //             console.log(poses[i].pose.keypoints[j].part);
-    //             let x = poses[i].pose.keypoints[j].position.x; // x coord of part
-    //             let y = poses[i].pose.keypoints[j].position.y; // y coord of part
-
-    //             fill(255, 255, 0);
-    //             noStroke();
-    //             ellipse(x, y, 5, 5); // draw an ellipse at that point
-    //         }
-    //     }
-
-    // }
-}
-
-function modelLoaded() {
-    console.log("Model Loaded");
+                    // co
 }
