@@ -19,11 +19,11 @@ You can't see my face, but you can understand my expression :)
 
 ## How it works
 This project uses [face-api.js](https://github.com/justadudewhohacks/face-api.js?files=1) and [p5.js](http://p5js.org/). 
-P5JS provides the video input the html canvas on which the video is displayed.
+P5JS provides the video input and the html canvas on which the video is displayed.
 
 All the code that makes it work is in [script.js](./js/script.js)
 
-Face-api.js has various pre-trained models that can be used for different purposes. This project uses a mobilenet model trained with faces from the internet (the SsdMobileNetv1 model). Along with face expression classification, the api also provides a bounding box for the face, using the coordinates of which an emoji is drawn on top of the face. The model has seven choices of emotions - 
+Face-api.js, which is built on top of [tensorflow.js](https://js.tensorflow.org/) has various pre-trained models that can be used for different purposes. This project uses a mobilenet model trained with faces from the internet (the SsdMobileNetv1 model). Along with face expression classification, the api also provides a bounding box for the face, using the coordinates of which an emoji is drawn on top of the face. The model has seven choices of emotions - 
   - Neutral
   - Happy
   - Sad
