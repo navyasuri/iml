@@ -35,7 +35,7 @@ Given an input video image, it recognises the face(s), reads the expression(s) a
 
 ![console log](./examples/expr-array.png)
 
-My code loops over this array, finds the maximum probability emotion. Then, using the x and y coordinates of the bounding box, my code as able to draw an image that is almost exactly over the face of the person. 
+My code loops over this array, finds the maximum probability emotion. I have an image file corresponding to each emotion that is preloaded. Using the x and y coordinates of the bounding box, my code as able to draw the image corresponding to the emotion almost exactly over the face of the person. 
 
 ## Why I did this
 This project was an assignment for the class Interactive Machine Learning at NYU Shanghai. The task was to use machine learning in some creative way with a pre-trained model. I thought this was a really cool way to do something fun with machine learning. I hope that someday, instead of blurring people's faces out on media when consent is not given, someone could emojify their face instead. At least we'd be able to tell what the person is thinking, as opposed to nothing when there's a blurred face. 
