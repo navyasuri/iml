@@ -36,11 +36,11 @@ function draw() {
     // image(video, 0, 0); // Video gives an image every frame, display at given coords
     // console.log(video.elt)
 
-    const allFaces = faceapi.detectAllFaces(video.elt).withFaceExpressions()
+    faceapi.detectAllFaces(video.elt).withFaceExpressions()
         .then((allFaces) => {
 
-        background(255);
-        image(video, 640, 0, -640, 480)
+            background(255);
+            image(video, 640, 0, -640, 480)
             for (var detectionsWithExpressions of allFaces) {
                 console.log(allFaces);
 
@@ -67,8 +67,11 @@ function draw() {
                     }
 
                     let small = Math.max(face.box.width, face.box.height);
-                    
+
                     image(bestImg, face.box.x, face.box.y, small, small);
                     // console.log(neutral, face.box.x, face.box.y, small, small);
                     // co
-}
+                }
+            }
+        });
+    }
