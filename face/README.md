@@ -5,6 +5,16 @@ Great! This is the perfect solution to your problems.
 Meet Emojify! It uses machine learning to read your facial expression and understand what you are feeling. And using the magic of drawing, it covers your face with an emoji instead. Voila!
 
 ## Examples
+You can't see my face, but you can understand my expression :)
+
+### neutral face
+![neutral face](./examples/neutral.png)
+
+### happy face
+![happy face](./examples/happy.png)
+
+### surprised face
+![surprised face](./examples/surprise.png)
 
 ## How it works
 This project uses [face-api.js](https://github.com/justadudewhohacks/face-api.js?files=1) and [p5.js](http://p5js.org/). 
@@ -18,7 +28,16 @@ Face-api.js has various pre-trained models that can be used for different purpos
   - Fear
   - Disgust
 
-Given an input video image, it recognises the face(s), reads the expression(s) and returns an Array of probabilities of each emotion. My code loops over this array, finds the maximum probability emotion. Then, using the x and y coordinates of the bounding box, my code as able to draw an image that is almost exactly over the face of the person. 
+Given an input video image, it recognises the face(s), reads the expression(s) and returns an Array of probabilities of each emotion. 
+
+![console log](./examples/expr-array.png)
+
+My code loops over this array, finds the maximum probability emotion. Then, using the x and y coordinates of the bounding box, my code as able to draw an image that is almost exactly over the face of the person. 
 
 ## Why I did this
-This project was an assignment for the class Interactive Machine Learning at NYU Shanghai. The task was to use machine learning in some creative way with a pre-trained model. 
+This project was an assignment for the class Interactive Machine Learning at NYU Shanghai. The task was to use machine learning in some creative way with a pre-trained model. I thought this was a really cool way to do something fun with machine learning. I hope that someday, instead of blurring people's faces out on media when consent is not given, someone could emojify their face instead. At least we'd be able to tell what the person is thinking, as opposed to nothing when there's a blurred face. 
+
+## Potential Improvements
+* It's kinda slow right now, but I guess that's because of how long it takes to classify the image. Could potentially only classify every n<sup>th</sup> frame instead of every frame. 
+* Use the probabilities to map to different emojis that show the strength of the expression. Something like - 0.7 happy is a smiley face :) where as anything greater that 0.9 probability is a very happy face :D. This could be done for all the different emotions to make it more accurate. 
+* Right now, the recognition of expressions is not really that accurate. Maybe retraining the model in some way could help fix this. 
