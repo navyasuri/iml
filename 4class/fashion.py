@@ -6,6 +6,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
+training = False
+
 fashion = keras.datasets.fashion_mnist
 
 # Get the data from the data set
@@ -26,28 +28,34 @@ train_images = train_images/255.0
 test_images = test_images/255.0
 
 # Forward Propagation
+if training:
 
-model = keras.Sequential([
-    keras.layers.Flatten(input_shape=(28, 28)), 
-    keras.layers.Dense(128, activation=tf.nn.relu), 
-    keras.layers.Dense(10, activation=tf.nn.softmax)
-])
+    model = keras.Sequential([
+        keras.layers.Flatten(input_shape=(28, 28)), 
+        keras.layers.Dense(128, activation=tf.nn.relu), 
+        keras.layers.Dense(10, activation=tf.nn.softmax)
+    ])
 
-model.compile(optimizer='adam', 
-    loss='sparse_categorical_crossentropy',
-    metrics=['accuracy'])
+    model.compile(optimizer='adam', 
+        loss='sparse_categorical_crossentropy',
+        metrics=['accuracy'])
 
-model.fit(train_images, train_labels, epochs=5)
+    # model.save('fashion.h5')
 
-test_loss, test_acc = model.evaluate(test_images, test_labels)
+    model.fit(train_images, train_labels, epochs=5)
 
-predictions = model.predict(test_images)
-random_image = np.random.randint(0, 10000)
-prediction = predictions[random_image]
+    test_loss, test_acc = model.evaluate(test_images, test_labels)
 
-print(prediction)
+else:
+    model = keras.models.load_model('fashion.h5')
+    
+    predictions = model.predict(test_images)
+    random_image = np.random.randint(0, 10000)
+    prediction = predictions[random_image]
 
-pred_label = np.argmax(prediction)
-print(class_names[pred_label])
-plt.imshow(test_images[pred_label])
-plt.show()
+    print(prediction)
+
+    pred_label = np.argmax(prediction)
+    print(class_names[pred_label])
+    plt.imshow(test_images[pred_label])
+    plt.show()
