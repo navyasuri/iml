@@ -1,0 +1,21 @@
+# make dir of PetsHandsOnExcercise
+cd ~/PetsHandsOnExcercise
+
+# Create a new directory to save the Tfrecords generated
+mkdir TfRecords
+
+# Organize images from copied data folder(breeds) to train and validations sets. It also takes care of organising the data inside train/validation folder to different pet categories
+cp ../tf/split_data_to_train_validation_set.py ./
+/glob/intel-python/python2/bin/python split_data_to_train_validation_set.py
+
+# Create Tf Records from train and validation datasets
+/glob/intel-python/python2/bin/python models/research/inception/inception/data/build_image_data.py --train_directory=breeds/train --validation_directory=breeds/val --output_directory=TfRecords --labels_file=breeds/categories.txt
+
+# Create a directory to save the trained models
+mkdir train_dir
+
+# Train the data with inception v3 with hyperparameters ( learning rate :0.001, batch size : 24, number of iterations : 50)
+/glob/intel-python/python2/bin/python models/research/slim/train_image_classifier.py --train_dir=train_dir/ --dataset_dir=TfRecords/  --dataset_split_name=train --model_name=inception_v3 --checkpoint_path=checkpoints/inception_v3.ckpt --clone_on_cpu=True --max_number_of_steps=50 --batch_size=24 --learning_rate=0.01 --checkpoint_exclude_scopes=InceptionV3/Logits,InceptionV3/AuxLogits --trainable_scopes=InceptionV3/Logits,InceptionV3/AuxLogits
+
+# Evaluate the created model and get the accuracy and recall
+/glob/intel-python/python2/bin/python models/research/slim/eval_image_classifier.py --alsologtostderr --checkpoint_path=train_dir/model.ckpt-50 --dataset_dir=TfRecords --dataset_split_name=validation --dataset_name=imagenet --model_name=inception_v3 --eval_dir=eval_dir --max_num_batches=3 --batch_size=100

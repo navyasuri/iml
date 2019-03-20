@@ -1,0 +1,17 @@
+# store pet breeds dataset
+rm -rf ~/PetsHandsOnExcercise
+mkdir -p ~/PetsHandsOnExcercise/breeds
+cp /data/aidata/breeds/original/* ~/PetsHandsOnExcercise/breeds/
+echo "Dataset prepared."
+
+# store models
+cp -rf /data/tf_workshop/models ~/PetsHandsOnExcercise/
+echo "Model prepared."
+
+# store checkpoint
+mkdir ~/PetsHandsOnExcercise/checkpoints
+cp /data/tf_workshop/inception_v3.ckpt ~/PetsHandsOnExcercise/checkpoints/
+echo "Checkpoint prepared."
+
+#cp clean_data.py ~/PetsHandsOnExcercise/
+/glob/intel-python/python2/bin/python clean_data.py
