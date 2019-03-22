@@ -1,1 +1,1 @@
-select number from pokemon where height_m < 0.75;
+select number, name from pokemon where height_m < 0.75;
