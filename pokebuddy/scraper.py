@@ -7,7 +7,10 @@ fp = open("out.csv")
 wp = open("desc.csv", "w+")
 fp.readline()
 
+count = 0
+
 for line in fp:
+    count+=1
     pokeline = line.strip().lower().split(",")
     
     response = requests.get(url+pokeline[0])
@@ -46,6 +49,8 @@ for line in fp:
     para = "^".join(para)
     data = line.strip()+","+para
     wp.write(data+"\n")
+    if count==1:
+        break
 # number, name, descriptions (v:desc)
 
 wp.close()
