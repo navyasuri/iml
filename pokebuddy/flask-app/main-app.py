@@ -2,7 +2,7 @@ from flask import Flask, request, render_template, url_for
 import os
 # import utils.(filename)
 
-# To run this, type in terminal: `export FLASK_APP=main.py` (or whatever name of file is)
+# To run this, type in terminal: `export FLASK_APP=main-app.py` (or whatever name of file is)
 # Then type flask run
 # Additional options: Use `flask run --host=0.0.0.0` or any other host you want to specify.
 # additionally you can add `--port=4000` after the previous command to run on port 4000
