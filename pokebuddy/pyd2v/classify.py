@@ -3,7 +3,7 @@ from nltk import word_tokenize
 
 d2v = Doc2Vec.load("d2v.model")
 
-string = ""
+string = "super hot fire pokemon. burns everything to ash."
 x=d2v.infer_vector(word_tokenize(string.lower()),steps=50, alpha=0.025)
 print(x)
 

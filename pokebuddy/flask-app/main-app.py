@@ -13,10 +13,10 @@ app = Flask(__name__)
 def show_page(): # The function name can be anything
 
     # You can just return default text 
-    return "Hello. Welcome to default page"
+    # return "Hello. Welcome to default page"
 
     # You'd rather return a rendered html file
-    # return render_template("index.html") 
+    return render_template("index.html") 
 
 # Just another route - this will be 0.0.0.0:4000/other
 @app.route('/other')
