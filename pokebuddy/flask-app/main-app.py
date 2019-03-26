@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template, url_for
 import os
-# import utils.(filename)
+import Utils.classify
 
 # To run this, type in terminal: `export FLASK_APP=main-app.py` (or whatever name of file is)
 # Then type flask run
@@ -19,6 +19,8 @@ def show_page(): # The function name can be anything
     return render_template("index.html") 
 
 # Just another route - this will be 0.0.0.0:4000/other
-@app.route('/other')
+@app.route('/classify', methods=['POST'])
 def show_another():
-    return "Welcome to other"
+    doc = request.form['inputText']
+    number = Utils.classify.classify(doc)
+    return render_template("video.html", number=number)

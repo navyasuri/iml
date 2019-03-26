@@ -8,10 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <form action="/classify" method="POST">
-        <textarea name="inputText" rows=20 cols="80"></textarea>
-        <button type="submit">Lets GO</button>
-    </form>
-<script src="{{url_for('static', filename='script.js')}}"></script>
+    <button onclick="getImage('{{number}}')">Get Image</button>
+<script src="{{url_for('static', filename='video.js')}}"></script>
 </body>
 </html>
