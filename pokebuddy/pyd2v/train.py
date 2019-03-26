@@ -23,7 +23,7 @@ for line in fp:
     # print(description)
     descriptions.append(description)
 
-tag_data = [TaggedDocument(words=word_tokenize(desc.lower()), tags=[num]) for num, desc in zip(names, descriptions)]
+tag_data = [TaggedDocument(words=word_tokenize(desc.lower()), tags=[num]) for num, desc in zip(numbers, descriptions)]
 
 # Declare training constants
 EPOCHS = 100

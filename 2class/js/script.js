@@ -34,16 +34,16 @@ function draw() {
             if (p.part == "leftShoulder") {
                 sx=p.position.x; // x coord of part
                 sy=p.position.y; // y coord of part 
-                fill(255, 255, 0);
-                noStroke();
-                ellipse(sx, sy, 5, 5); // draw an ellipse at that point
+                // fill(255, 255, 0);
+                // noStroke();
+                // ellipse(sx, sy, 5, 5); // draw an ellipse at that point
             }
             if (p.part=="leftEar"){
                 ex=p.position.x; // x coord of part
                 ey=p.position.y; // y coord of part
-                fill(255, 255, 0);
-                noStroke();
-                ellipse(ex, ey, 5, 5)
+                // fill(255, 255, 0);
+                // noStroke();
+                // ellipse(ex, ey, 5, 5)
             }
             
             w = 2* (ex-sx);

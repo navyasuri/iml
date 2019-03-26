@@ -22,5 +22,6 @@ def show_page(): # The function name can be anything
 @app.route('/classify', methods=['POST'])
 def show_another():
     doc = request.form['inputText']
-    number = Utils.classify.classify(doc)
+    number = str(Utils.classify.classify(doc))
+    number = number.zfill(4) + ".png"
     return render_template("video.html", number=number)
