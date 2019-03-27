@@ -3,7 +3,7 @@ console.log("Video script loaded")
 let video;
 let poseNet; // This would be the machine learning model
 let poses;
-let img;
+let imgs={};
 
 var cnv;
 
@@ -60,7 +60,7 @@ function draw() {
             
             fill(255, 0, 0);
             // rect(x,y,-d,d);
-            image(img, x, y, -d, d)
+            image(imgs[0], x, y, -d, d)
         }
     }
 
@@ -79,6 +79,6 @@ function windowResized() {
 }
 
 // Loading image
-function getImage(num){
-    img = loadImage("static/images/"+num);
+function getImage(n1, n2, n3){
+    imgs = [loadImage("static/images/"+n1), loadImage("static/images/"+n2), loadImage("static/images/"+n3)];
 }
