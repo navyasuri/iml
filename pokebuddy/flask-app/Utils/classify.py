@@ -17,4 +17,4 @@ def classify(doc):
     vector = d2v.infer_vector(word_tokenize(doc.lower()),steps=50, alpha=0.025)
     similars = d2v.docvecs.most_similar([vector])
 
-    return similars[0][0]
+    return similars[0][:3]
