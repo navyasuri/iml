@@ -26,12 +26,12 @@ for line in fp:
 tag_data = [TaggedDocument(words=word_tokenize(desc.lower()), tags=[num]) for num, desc in zip(numbers, descriptions)]
 
 # Declare training constants
-EPOCHS = 1000
+EPOCHS = 100
 SIZE = 50
 ALPHA = 0.025
 DM = 0 # If 1, word order matters, if 0 doesnt matter (ie bag of words)
 
-d2v = Doc2Vec(vector_size=SIZE, alpha=ALPHA, dm=DM, min_alpha=0.000025, min_count=1)
+d2v = Doc2Vec(vector_size=SIZE, alpha=ALPHA, dm=DM, min_alpha=0.00025, min_count=1)
 d2v.build_vocab(tag_data)
 
 for epoch in range(EPOCHS):

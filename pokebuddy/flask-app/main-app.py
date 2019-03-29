@@ -25,5 +25,5 @@ def show_another():
     # number = str(Utils.classify.classify(doc))
     # number = number.zfill(4) + ".png"
     # return render_template("video.html", number=number)
-    numbers = [str(num).zfill(4) for num in Utils.classify.classify(doc)]
+    numbers = [str(num[0]).zfill(4)+".png" for num in Utils.classify.classify(doc)]
     return render_template("video.html", n1=numbers[0], n2=numbers[1], n3=numbers[2])

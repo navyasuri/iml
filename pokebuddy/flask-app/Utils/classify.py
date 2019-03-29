@@ -14,7 +14,9 @@ import os
 def classify(doc):
     totalpath = os.path.join(os.getcwd(), "Utils", "d2v.model")
     d2v = Doc2Vec.load(totalpath)
-    vector = d2v.infer_vector(word_tokenize(doc.lower()),steps=50, alpha=0.025)
+    vector = d2v.infer_vector(word_tokenize(doc.lower()),steps=100, alpha=0.025)
     similars = d2v.docvecs.most_similar([vector])
 
-    return similars[0][:3]
+    print(similars)
+
+    return similars[:3]
