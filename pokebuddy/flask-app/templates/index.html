@@ -9,7 +9,9 @@
 </head>
 <body>
     <form action="/classify" method="POST">
+        <h2>Type in the kind of pokemon you would like. Be descriptive</h2>
         <textarea name="inputText" rows=20 cols="80"></textarea>
+        <br>
         <button type="submit">Lets GO</button>
     </form>
 <script src="{{url_for('static', filename='script.js')}}"></script>

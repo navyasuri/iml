@@ -15,7 +15,7 @@ function setup() {
     video.hide() // hides the html element
 
     options = {
-        imageScaleFactor: 0.3,
+        imageScaleFactor: 0.5,
         outputStride: 8,
         flipHorizontal: false,
         minConfidence: 0.25,
