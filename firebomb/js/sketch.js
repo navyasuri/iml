@@ -4,11 +4,11 @@ let transfer = false;
 // let style_names = ['zaha','wave','udnie'];
 // let styles = [];
 // let style_index = 0;
-let style;
 
 function setup() {
   // put setup code here
-  createCanvas(640,480);
+  let cnv = createCanvas(640,480);
+  cnv.parent('sketch-holder');
   video = createCapture(VIDEO);
   video.size(640,480);
   video.hide();
@@ -19,7 +19,7 @@ function setup() {
   //     console.log(style_names[i] + "model is loaded");
   //   });
   // }
-  style = ml5.styleTransfer("../models/zaha", video, function(){
+  style = ml5.styleTransfer("model", video, function(){
     console.log("model is loaded");
   });
 
@@ -30,12 +30,13 @@ function setup() {
 function draw() {
   // put drawing code here
 
-  if(styles[style_index].ready && transfer){
-    styles[style_index].transfer(function(err, results){
+  if(style.ready && transfer){
+    style.transfer(function(err, results){
       if(err){
         console.log("style transfer failed...");
       }else{
         output.attribute('src', results.src);
+        console.log("transferred!");
       }
     });
   }
@@ -52,16 +53,21 @@ function draw() {
 function keyPressed(){
   if(key === ' '){
     transfer = !transfer;
+    if(transfer){
+      makeBoom();
+    }
+    else{
+      removeBoom();
+    }
   }
-  if(key == 'q' || key == 'Q'){
-    style_index = 2;
-  }
-  if(key == 'a' || key == 'A'){
-    style_index = 1;
-  }
-  if(key == 'z' || key == 'Z'){
-    style_index = 0;
-  }
+}
 
+function makeBoom(){
+  document.getElementById('sketch-holder').classList.remove('shaker');
+  document.getElementById('sketch-holder').classList.add('shaker');
 
+}
+
+function removeBoom(){
+  document.getElementById('sketch-holder').classList.remove('shaker');
 }
