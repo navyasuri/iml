@@ -15,6 +15,8 @@ player1_score = 0
 player2_score = 0
 
 current_player = player1
+turns = ['guess', 'desc']
+turn = 0
 
 # What to do when user goes to default route
 @app.route('/')
@@ -26,11 +28,30 @@ def show_page(): # The function name can be anything
     # You'd rather return a rendered html file
     return render_template("index.html") 
 
-# Just another route - this will be 0.0.0.0:4000/other
-@app.route('/game')
-def show_another():
+@app.route('/game-setup', methods=['GET', 'POST'])
+def game_setup():
+    # If GET method, return the page
+    # If POST method, return the game route with player 1 loaded
+    # In POST also set global variables from request form
+    return redirect(url_for('game'))
 
-    if current_player==player1:
-        return render_template("game.html", player1=player1, player2=player2)
-    elif current_player==player2:
-        return render_template("game.html", player1=player1, player2=player2)
+@app.route('/game')
+def eval_and_display():
+    # Submit with parameters in the request form
+
+    # Read form and decide parameters, path and image
+
+
+
+    return_page = turns[turn]+".html"
+    return render_template(render_page, player=current_player, next_turn=turns[turn-1])
+
+@app.route('result')
+def result_and_next():
+
+    return render_template(next_page, next_player)
+
+@app.route('/score')
+def scoring():
+
+    return render_template("scoring.html", player1score=player2_score, player2_score=player2_score)
