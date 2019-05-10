@@ -18,6 +18,7 @@ player2_score = 0
 current_player = player1
 turns = ['desc', 'guess']
 turn = 0
+    
 
 # What to do when user goes to default route
 @app.route('/')
@@ -40,14 +41,9 @@ def game_setup():
 @app.route('/game',  methods=['POST'])
 def eval_and_display():
     # If we come from GameOps, set our parameters accordingly
-    from_gameops, from_desc = False
-    try:
-        ops = request.form['fromops']
-        from_gameops = True
-    except:
-        pass
     
-    if from_gameops:
+    if 'fromops' in request.form:
+        global player1, player2
         player1 = request.form['p1name']
         player2 = request.form['p2name']
         current_player = player1
@@ -57,29 +53,31 @@ def eval_and_display():
         return render_template(return_page, player=current_player)
 
     # If we come from desc, then we should generate image
-    try:
-        desc = request.form['fromdesc']
-        from_desc = True
-    except:
-        pass
-    
-    if from_desc:
+    if 'from_desc' in request.form:
         caption = request.form['caption']
         # caption player is the one who provided caption to generate image
         caption_player = request.form['d_player']
-        next_player = player1 if caption_player==player2 else player2
+        print(caption, caption_player)
+        # next_player = player1 if caption_player==player2 else player2
+        next_player = player1
+        if caption_player==player2: next_player=player2
+
         # Generate image and copy to static folder
+        generator = subprocess.Popen(["bash", "generate_img.sh", caption])
+        generator.wait()
+
+        return render_template('guess.html', player=next_player)
 
     # Read form and decide parameters, path and image
 
 
 
-    
-
 @app.route('/result')
 def result_and_next():
+    current_round+=1
+    if current_round == rounds
 
-    return render_template(next_page, next_player)
+
 
 @app.route('/score')
 def scoring():
