@@ -41,6 +41,7 @@ def game_setup():
 def eval_and_display():
     # Submit with parameters in the request form
     detials = request.form
+    print(details)
     # Read form and decide parameters, path and image
 
 
