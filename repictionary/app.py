@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, url_for
+from flask import Flask, request, render_template, url_for, redirect
 import os, subprocess
 # import utils.(filename)
 
@@ -11,6 +11,7 @@ app = Flask(__name__)
 player1 = "Player 1"
 player2 = "Player 2"
 rounds = 0
+current_round = 0
 player1_score = 0
 player2_score = 0
 
@@ -26,19 +27,20 @@ def show_page(): # The function name can be anything
     # return "Hello. Welcome to default page"
 
     # You'd rather return a rendered html file
-    return render_template("index.html") 
+    return render_template("landing.html") 
 
-@app.route('/game-setup', methods=['GET', 'POST'])
+@app.route('/gamesetup', methods=['GET', 'POST'])
 def game_setup():
     # If GET method, return the page
     # If POST method, return the game route with player 1 loaded
     # In POST also set global variables from request form
-    return redirect(url_for('game'))
+    # return redirect(url_for('game'))
+    return render_template('gameops.html')
 
 @app.route('/game')
 def eval_and_display():
     # Submit with parameters in the request form
-
+    detials = request.form
     # Read form and decide parameters, path and image
 
 
@@ -46,7 +48,7 @@ def eval_and_display():
     return_page = turns[turn]+".html"
     return render_template(render_page, player=current_player, next_turn=turns[turn-1])
 
-@app.route('result')
+@app.route('/result')
 def result_and_next():
 
     return render_template(next_page, next_player)
