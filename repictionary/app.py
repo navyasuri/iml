@@ -16,7 +16,7 @@ player1_score = 0
 player2_score = 0
 
 current_player = player1
-turns = ['guess', 'desc']
+turns = ['desc', 'guess']
 turn = 0
 
 # What to do when user goes to default route
@@ -29,7 +29,7 @@ def show_page(): # The function name can be anything
     # You'd rather return a rendered html file
     return render_template("landing.html") 
 
-@app.route('/gamesetup', methods=['GET', 'POST'])
+@app.route('/gamesetup')
 def game_setup():
     # If GET method, return the page
     # If POST method, return the game route with player 1 loaded
@@ -37,17 +37,44 @@ def game_setup():
     # return redirect(url_for('game'))
     return render_template('gameops.html')
 
-@app.route('/game')
+@app.route('/game',  methods=['POST'])
 def eval_and_display():
-    # Submit with parameters in the request form
-    detials = request.form
-    print(details)
+    # If we come from GameOps, set our parameters accordingly
+    from_gameops, from_desc = False
+    try:
+        ops = request.form['fromops']
+        from_gameops = True
+    except:
+        pass
+    
+    if from_gameops:
+        player1 = request.form['p1name']
+        player2 = request.form['p2name']
+        current_player = player1
+
+        # Display the player1 caption page
+        return_page = "desc.html"
+        return render_template(return_page, player=current_player)
+
+    # If we come from desc, then we should generate image
+    try:
+        desc = request.form['fromdesc']
+        from_desc = True
+    except:
+        pass
+    
+    if from_desc:
+        caption = request.form['caption']
+        # caption player is the one who provided caption to generate image
+        caption_player = request.form['d_player']
+        next_player = player1 if caption_player==player2 else player2
+        # Generate image and copy to static folder
+
     # Read form and decide parameters, path and image
 
 
 
-    return_page = turns[turn]+".html"
-    return render_template(render_page, player=current_player, next_turn=turns[turn-1])
+    
 
 @app.route('/result')
 def result_and_next():
