@@ -1,14 +1,33 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base.html' %}
 
-<head>
-    <title>Webpage Title</title>
-    <!-- NOTE below the formats for using static files like css or a script(js) file -->
-	<link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
+{% block content %}
 
-<script src="{{url_for('static', filename='script.js')}}"></script>
-</body>
-</html>
+<div class="row">
+        <div class="col-md-6 offset-md-3 col-sm-12 offset-sm-0">
+            <div class="jumbotron">
+                <h2 align="center" class="retro-font">{{player}}'s turn</h2>
+                <h4 align="center">Write down a description below</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+            <form method="POST" action="/game">
+
+                <div class="form-group row">
+                    <label for="p1name" class="col-sm-3 col-form-label retro-font">Caption for Image</label>
+                    <div class="col-sm-9">
+                        <input type="password" class="form-control" id="p1name" value="">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary retro-font">Generate Image</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+{% endblock %}
