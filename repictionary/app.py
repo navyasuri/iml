@@ -34,20 +34,29 @@ def welcome(): # The function name can be anything
 
 @app.route('/gamesetup')
 def game_setup():
-    # If GET method, return the page
-    # If POST method, return the game route with player 1 loaded
-    # In POST also set global variables from request form
-    # return redirect(url_for('game'))
+    # RESET GLOBAL VARIABLES
+    global player1, player2, player1_score, player2_score, rounds, current_round, current_player, current_desc
+    player1 = "Player 1"
+    player2 = "Player 2"
+    rounds = 0
+    current_round = 0
+    player1_score = 0
+    player2_score = 0
+    current_player = player1
+    current_desc = ""
+
     return render_template('gameops.html')
 
 @app.route('/game',  methods=['POST'])
 def eval_and_display():
     # If we come from GameOps, set our parameters accordingly
     
+    print('p1', player1_score, 'p2', player2_score)
+
     if 'fromops' in request.form:
         global player1, player2, rounds
-        player1 = request.form['p1name']
-        player2 = request.form['p2name']
+        if request.form['p1name']!="": player1 = request.form['p1name']
+        if request.form['p2name']!="": player2 = request.form['p2name']
         current_player = player1
         rounds = int(request.form['numrounds'])*2
         # Display the player1 caption page
@@ -67,7 +76,8 @@ def eval_and_display():
         if caption_player==player2: next_player=player1
 
         # Generate image and copy to static folder
-        generator = subprocess.Popen(["bash", "generate_img.sh", caption])
+        FNULL=open(os.devnull, 'w')
+        generator = subprocess.Popen(["bash", "generate_img.sh", caption], stdout=FNULL)
         generator.wait()
 
         return render_template('guess.html', player=next_player)
@@ -78,7 +88,7 @@ def eval_and_display():
         next_captioner = player1
         if prev_guesser == player2:
             next_captioner = player2
-        print(prev_guesser, next_captioner, player1_score, player2_score)
+        # print(prev_guesser, next_captioner, player1_score, player2_score)
         return render_template("desc.html", player=next_captioner)
 
     # Read form and decide parameters, path and image
@@ -95,9 +105,10 @@ def result_and_next():
 
     guess = request.form['guessed']
     guesser = request.form['guesser']
-    
+    print("guesser", guesser)
     score_value = score.score_sentences(current_desc, guess)
     score_value = round(100*score_value, 2)
+    print("score", score_value)
     if guesser == player1:
         player1_score += score_value
     else: player2_score += score_value
@@ -111,17 +122,18 @@ def result_and_next():
     scoreof=guesser)
 
 
-@app.route('/end')
+@app.route('/end', methods=['POST'])
 def final_scoring():
+    print(player1_score, player2_score)
     if player1_score>player2_score:
         winner=player1
-    elif player2_score<player1_score:
+    elif player2_score>player1_score:
         winner=player2
     else:
         winner="Nobody! It's a tie"
     return render_template("final.html", 
     player1=player1,
     player2=player2,
-    player1score=player1_score, 
-    player2_score=player2_score, 
+    player1_score=round(player1_score, 2), 
+    player2_score=round(player2_score, 2), 
     winner=winner)
