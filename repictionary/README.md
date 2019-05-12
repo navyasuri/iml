@@ -30,9 +30,11 @@ The image generation is done using an attnGAN, as described in [AttnGAN: Fine-Gr
 ![gan image](./examples/gan.png)
 The model uses [MS CoCo](http://cocodataset.org/) dataset, a popular dataset of images used for object and image recognition along with a range of other topics related to computer vision.
 
-### The web interface
-The entire web interface was created using [Flask](http://flask.pocoo.org/). The picture below is a rough sketch of the artitecture and the game logic specific to the web application. Details that are lacking here can be found by reading through the code, most of the relavant stuff is written in [`app.py`](./app.py). There are various routes and majority of the game data is passed using POST requests to the server. There is no database and game data such as scores are store as global variables, mostly since the project was a short term project for which I did not really need to create a database to do many things. 
-
 ### The scoring
-For the scoring part, I used the age-old sentence similarity provided by [spaCy](https://spacy.io). It uses word vectors to provide cosine similarity of the average vectors of the entire sentence. To avoid giving high scores to semantic similarity and place more importance of the actual content, I modified the input to the similarity function as described in [this]() StackOverflow answer. The results looked pretty promising to me. 
+For the scoring part, I used the age-old sentence similarity provided by [spaCy](https://spacy.io). It uses word vectors to provide cosine similarity of the average vectors of the entire sentence. To avoid giving high scores to semantic similarity and place more importance of the actual content, I modified the input to the similarity function as described in [this]() StackOverflow answer. The results looked pretty promising to me.
+
+### The web interface
+The entire web interface was created using [Flask](http://flask.pocoo.org/). The picture below is a rough sketch of the artitecture and the game logic specific to the web application. 
+![flask architecture](./examples/flask.png)
+Details that are lacking here can be found by reading through the code, most of the relavant stuff is written in [`app.py`](./app.py). There are various routes and majority of the game data is passed using POST requests to the server. There is no database and game data such as scores are store as global variables, mostly since the project was a short term project for which I did not really need to create a database to do many things.  
 
