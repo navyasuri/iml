@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, url_for, redirect
 import os, subprocess
+import score
 # import utils.(filename)
 
 # To run this, type in terminal: `export FLASK_APP=main.py` (or whatever name of file is)
@@ -18,7 +19,8 @@ player2_score = 0
 current_player = player1
 turns = ['desc', 'guess']
 turn = 0
-    
+
+current_desc = ""
 
 # What to do when user goes to default route
 @app.route('/')
@@ -55,12 +57,13 @@ def eval_and_display():
     # If we come from desc, then we should generate image
     if 'from_desc' in request.form:
         caption = request.form['caption']
+        current_desc = caption
         # caption player is the one who provided caption to generate image
         caption_player = request.form['d_player']
         print(caption, caption_player)
         # next_player = player1 if caption_player==player2 else player2
-        next_player = player1
-        if caption_player==player2: next_player=player2
+        next_player = player2
+        if caption_player==player2: next_player=player1
 
         # Generate image and copy to static folder
         generator = subprocess.Popen(["bash", "generate_img.sh", caption])
@@ -75,11 +78,19 @@ def eval_and_display():
 @app.route('/result')
 def result_and_next():
     current_round+=1
-    if current_round == rounds
+    next_page=""
+    if current_round == rounds:
+        next_page="end"
+    else:
+        next_page="desc"
+
+    guess = request.form['guessed']
+    
+    score_value = score.score_sentences(current_desc, guess)
+    return render_template('result.html', next_page=next_page, score_val=score_value)
 
 
-
-@app.route('/score')
-def scoring():
+@app.route('/end')
+def final_scoring():
 
     return render_template("scoring.html", player1score=player2_score, player2_score=player2_score)
