@@ -77,7 +77,7 @@ def eval_and_display():
 
         # Generate image and copy to static folder
         FNULL=open(os.devnull, 'w')
-        generator = subprocess.Popen(["bash", "generate_img.sh", caption], stdout=FNULL)
+        generator = subprocess.Popen(["bash", "generate_img.sh", caption], stdout=FNULL, stderr=FNULL)
         generator.wait()
 
         return render_template('guess.html', player=next_player)
