@@ -38,3 +38,11 @@ The entire web interface was created using [Flask](http://flask.pocoo.org/). The
 ![flask architecture](./examples/flask.png)
 Details that are lacking here can be found by reading through the code, most of the relavant stuff is written in [`app.py`](./app.py). There are various routes and majority of the game data is passed using POST requests to the server. There is no database and game data such as scores are store as global variables, mostly since the project was a short term project for which I did not really need to create a database to do many things.  
 
+## Why I did this
+This project was my final project for the class Interactive Machine Learning at NYU Shanghai. The final project was open to any ideas and required us to put machine learning to some creative use, preferrably by training a model. I knew I wanted to try and explore the domain of text-to-image synthesis. Instead of making a rudimentary interface to just wow users with the fact that computers nowadays are making strides in text-to-image generation with GANs, I decided to gamify this. It's a twist on a classic game we've all played as kids. Although the images generated are sometimes (highly) inaccurate, I'm happy that I've created a framework to potentially take this game further and make the image generation more accurate using a specific domain of images. 
+
+## Potential Improvements
+- Obviously, the image generation is very sloppy. I would like to train the model using a specific domain of images. For example, only food images would be a fun way to proceed, given that I am able to find a decent dataset or compile one on my own. 
+- The generation of the image takes roughly 2 seconds or so. I don't think there's a way to speed that part up but maybe it'd be nice to have a GIF or animation play while the image is being generated. 
+- Add a live score-tracking snippet on the side of the webpage to let users keep track of their scores on all pages. 
+- Try out other GAN models and see how they perform in text-to-image generation. Of particular interest would be the StackGAN++, an earlier iteration of the AttnGAN. 
