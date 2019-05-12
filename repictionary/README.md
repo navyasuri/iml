@@ -26,9 +26,13 @@ Here are some images of the interface of the game. I used some retro fonts and t
 
 ## How does it work?
 ### Image generation
-The image generation is done using an attnGAN, as described in [AttnGAN: Fine-Grained Text to Image Generation with Attentional Generative Adversarial Networks](http://openaccess.thecvf.com/content_cvpr_2018/papers/Xu_AttnGAN_Fine-Grained_Text_CVPR_2018_paper.pdf) by Tao Xu, Pengchuan Zhang, Qiuyuan Huang, Han Zhang, Zhe Gan, Xiaolei Huang, Xiaodong He. It uses a pytorch implementation of the model as done in [this repo](https://github.com/taoxugit/AttnGAN) with additional modifications from [this repo](https://github.com/sleebapaul/attnGAN). A high level architecture of the GAN is described in the image below. The model uses [MS CoCo](http://cocodataset.org/) dataset, a popular dataset of images used for object and image recognition along with a range of other topics related to computer vision.
+The image generation is done using an attnGAN, as described in [AttnGAN: Fine-Grained Text to Image Generation with Attentional Generative Adversarial Networks](http://openaccess.thecvf.com/content_cvpr_2018/papers/Xu_AttnGAN_Fine-Grained_Text_CVPR_2018_paper.pdf) by Tao Xu, Pengchuan Zhang, Qiuyuan Huang, Han Zhang, Zhe Gan, Xiaolei Huang, Xiaodong He. It uses a pytorch implementation of the model as done in [this repo](https://github.com/taoxugit/AttnGAN) with additional modifications from [this repo](https://github.com/sleebapaul/attnGAN). A high level architecture of the GAN is described in the image below. ([source](https://github.com/taoxugit/AttnGAN))
+![gan image](./examples/gan.png)
+The model uses [MS CoCo](http://cocodataset.org/) dataset, a popular dataset of images used for object and image recognition along with a range of other topics related to computer vision.
+
 ### The web interface
 The entire web interface was created using [Flask](http://flask.pocoo.org/). The picture below is a rough sketch of the artitecture and the game logic specific to the web application. Details that are lacking here can be found by reading through the code, most of the relavant stuff is written in [`app.py`](./app.py). There are various routes and majority of the game data is passed using POST requests to the server. There is no database and game data such as scores are store as global variables, mostly since the project was a short term project for which I did not really need to create a database to do many things. 
+
 ### The scoring
 For the scoring part, I used the age-old sentence similarity provided by [spaCy](https://spacy.io). It uses word vectors to provide cosine similarity of the average vectors of the entire sentence. To avoid giving high scores to semantic similarity and place more importance of the actual content, I modified the input to the similarity function as described in [this]() StackOverflow answer. The results looked pretty promising to me. 
 
