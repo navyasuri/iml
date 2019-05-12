@@ -6,12 +6,16 @@ Here are some images of the interface of the game. I used some retro fonts and t
 
 Choose basic game setting to begin
 ![game options](./examples/1.png)
+
 First player gets to type in a caption to generate an image
 ![p1 caption](./examples/2.png)
+
 Second player must guess the image that was GANarated
 ![p2 guess](./examples/3.png)
+
 Scores are assigned based on how similar the guess was to the original caption
 ![score](./examples/4.png)
+
 After repeating, the winner is announced. Hooray!
 ![result](./examples/5.png)
 
